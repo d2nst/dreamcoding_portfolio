@@ -96,4 +96,34 @@ function scrollIntoView(selector) {
   scrollTo.scrollIntoView({ behavior: 'smooth' });
 }
 
-//
+// progress bar - scroll 적용
+const progress = document.querySelectorAll('.skill__bar');
+const triggerPoint = document.querySelector('.skillset').offsetTop - 500;
+
+let excuted = false;
+
+window.addEventListener('scroll', () => {
+  let scrollAmt = window.scrollY;
+  if (scrollAmt > triggerPoint) {
+    if (!excuted) {
+      progress.forEach((item) => numAnimation(item));
+    }
+    excuted = true;
+  }
+});
+
+function numAnimation(item) {
+  let initialRate = 0;
+  let targetRate = item.getAttribute('data-num');
+  let progressBar = item.querySelector('.skill_value');
+  let progressRate =
+    item.previousElementSibling.querySelector('span:last-child');
+  let numAinmate = setInterval(() => {
+    if (initialRate == targetRate) {
+      clearInterval(numAinmate);
+    }
+    initialRate++;
+    progressBar.style.width = `${initialRate}%`;
+    progressRate.innerText = initialRate - 1 + '%';
+  }, 20);
+}
