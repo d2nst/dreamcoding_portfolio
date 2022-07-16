@@ -313,6 +313,7 @@ p {
   border-radius: var(--size-border-radius);
   font-size: var(--font-regular);
   padding: 8px 40px;
+  color: var(--color-black);
 }
 
 .category__btn.selected,
